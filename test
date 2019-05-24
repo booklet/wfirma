@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Usage:
+# $ test - run all tests
+# $ test single DHLRequestsTest::testRequestShipment - run single test, no namespace require
+
+# if no params run all test
+if [ -z $1 ] ; then
+    ./vendor/bin/phpunit --configuration tests/config/phpunit.xml && exit 1;
+fi
+
+if [ "$1" = "single" ];
+then
+    ./vendor/bin/phpunit --configuration tests/config/phpunit.xml --filter $2'$'
+fi

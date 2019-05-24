@@ -1,0 +1,29 @@
+{
+  "name": "boooklet/wfirma",
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "boooklet/wfirma",
+        "type": "package",
+        "source": {
+          "url": "git@github.com/boooklet/wfirma.git",
+          "type": "git",
+          "reference": "master"
+        },
+        "version": "1.0"
+      }
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/" ,
+      "Booklet\\Wfirma\\": "src/wfirma"
+    }
+  }
+}
