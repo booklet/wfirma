@@ -2,15 +2,11 @@
 namespace Booklet;
 
 use Booklet\WFirma\Utils;
+use Booklet\WFirma\Request;
 
 class WFirma
 {
     const WFIRMA_API_URL = 'https://api2.wfirma.pl/';
-    const INPUT_FORMAT = 'json';
-    const OUTPUT_FORMAT = 'json';
-
-
-    const RECORDS_PER_PAGE = 50;
 
     private $login;
     private $password;
@@ -26,27 +22,22 @@ class WFirma
     public function __get(string $name) {
         $class_name = '\\Booklet\\WFirma\\Modules\\' . Utils::stringToCamelCase($name);
         if (class_exists($class_name)) {
-            return new $class_name();
+            return new $class_name($this->login, $this->password, $this->company_id);
         }
     }
 
-    public function tmp_request($resource, $request, array $options = [])
+    public function request($resource, $action, array $request_parameters = [])
     {
-        // const INPUT_FORMAT = 'json';
-        // const OUTPUT_FORMAT = 'json';
-        $url = WFIRMA_API_URL . $resource . '?inputFormat=json&outputFormat=json';
-        if ($this->company_id) {
-            $url .= '&company_id=' . $this->company_id;
-        }
+        $request = new Request([
+            'login' => $this->login,
+            'password' => $this->password,
+            'resource' => $resource,
+            'action' => $action,
+            'request_parameters' => $request_parameters['request_parameters'] ?? null,
+            'data' => $request_parameters['data'] ?? null,
+            'company_id' => $this->company_id,
+        ]);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
-        curl_setopt($ch, CURLOPT_USERPWD, $this->login . ':' . $this->password);
-        $result = curl_exec($ch);
-
-        return $result;
+        return $request->makeRequest();
     }
 }

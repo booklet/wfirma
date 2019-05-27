@@ -1,35 +1,20 @@
 <?php
 namespace Booklet\WFirma\Modules;
 
-use Booklet\WFirma\Request;
+use \Booklet\WFirma\Modules;
 
-class Invoice
+class Invoice extends Modules
 {
-    const RESOURCE = 'invoices'
+    const MODULE_NAME_PLURAL = 'invoices';
 
-    public function find(array $options = [])
+    public function download(int $invoice_id, array $parameters = [])
     {
-        $request_params = [
-            'resource' => self::RESOURCE,
-        ];
-
-        $request = new Request($request_params);
-        return $request->makeRequest();
-
-        $options['parameters'];
-        $options['conditions'];
+       // /invoices/download/ID_FAKTURY
     }
 
-    public function get()
+    public function send(int $invoice_id, array $parameters = [])
     {
-    }
-
-    public function download()
-    {
-    }
-
-    public function send()
-    {
+        // /invoices/send/ID_FAKTURY
     }
 
     public function fiscalize()
@@ -37,18 +22,6 @@ class Invoice
     }
 
     public function unfiscalize()
-    {
-    }
-
-    public function add()
-    {
-    }
-
-    public function edit()
-    {
-    }
-
-    public function delete(])
     {
     }
 }
