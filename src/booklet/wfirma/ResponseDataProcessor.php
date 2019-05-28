@@ -60,17 +60,17 @@ class ResponseDataProcessor
     {
         $this->removeParameters();
 
-        $simplfy_data = [];
+        $simplify_data = [];
         foreach ($this->response[$this->resource] as $item) {
-            $simplfy_data[] = $item[array_keys($item)[0]];
+            $simplify_data[] = $item[array_keys($item)[0]];
         }
 
         // Actions: get, add, edit and delete, return array of one item, so we return this one item
         if ($this->isOneItemResponseRequest()) {
-            return $simplfy_data[0];
+            return $simplify_data[0];
         }
 
-        return $simplfy_data;
+        return $simplify_data;
     }
 
     private function setResourceName()
