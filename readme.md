@@ -1,5 +1,5 @@
 # PHP wFirma
-Module for constructing simple queries to the wFirma API. For PHP 7.0.
+Module for constructing simple queries to the wFirma API. For PHP 7.0 and above.
 
 ## Use
 Add repository in `composer.json` file:
