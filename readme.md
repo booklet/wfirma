@@ -1,5 +1,5 @@
 # PHP wFirma
-Module for constructing simple queries to the wFirma API
+Module for constructing simple queries to the wFirma API.
 
 ## Use
 Add repository in `composer.json` file:
@@ -16,33 +16,55 @@ Add repository in `composer.json` file:
   },
 }
 ```
-Initialization (`$company_id` optional)
+Initialization (`$company_id` optional):
 ```php
 $wfirma = new \Booklet\WFirma($login, $password, $company_id);
 ```
 ### Queries
 
-Get array of invoices
+Get array of invoices:
 ```php
-$invoices = $wfirma->invoices->find($parameters);
+$invoices = $wfirma->invoices->find($parameters (optional));
 ```
 
-Get contractor
+Get contractor:
 ```php
-$contractors = $wfirma->invoices->get($id);
+$contractors = $wfirma->contractors->get($id, $parameters (optional));
 ```
 
-The general principle of operation
+Create contractor:
+```php
+$contractors = $wfirma->contractors->add($data, $parameters (optional));
+```
+
+Edit contractor:
+```php
+$contractors = $wfirma->contractors->edit($id, $data, $parameters (optional));
+```
+
+Delete contractor:
+```php
+$contractors = $wfirma->contractors->delete($id, $parameters (optional));
+```
+
+The general principle of operation:
 ```php
 $response = $wfirma->{module_name}->{action}();
 ```
 
+We simplify data structure returned from wfirma (see ResponseDataProcessor class).
+
+If you want return raw response from api, add parameter:
+```php
+$invoices = $wfirma->invoices->find(['raw_response' => true]);
+```
+
 ###  Available modules
 
-See: `src/booklet/wfirma/modules/`
+See: `src/booklet/wfirma/modules/`.
 
 ### Sample parameters
-Detailed information about conditional queries: [https://doc.wfirma.pl/](https://doc.wfirma.pl/)
+Detailed information about conditional queries: [https://doc.wfirma.pl/](https://doc.wfirma.pl/).
 ```php
 $parameters = [
     'conditions' => [
