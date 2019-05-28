@@ -20,22 +20,26 @@ Initialization (`$company_id` optional)
 ```php
 $wfirma = new \Booklet\WFirma($login, $password, $company_id);
 ```
-Queries
+### Queries
+
 Get array of invoices
 ```php
 $invoices = $wfirma->invoices->find($parameters);
 ```
 
-Get contractor array
+Get contractor
 ```php
 $contractors = $wfirma->invoices->get($id);
 ```
 
 The general principle of operation
 ```php
-$response = $wfirma->{module_name}->get($id);
+$response = $wfirma->{module_name}->{action}();
 ```
-Available modules see: `src/booklet/wfirma/modules/`
+
+###  Available modules
+
+See: `src/booklet/wfirma/modules/`
 
 ### Sample parameters
 Detailed information about conditional queries: [https://doc.wfirma.pl/](https://doc.wfirma.pl/)

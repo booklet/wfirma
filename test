@@ -2,7 +2,7 @@
 
 # Usage:
 # $ test - run all tests
-# $ test single DHLRequestsTest::testRequestShipment - run single test, no namespace require
+# $ test single WFirmaTest::testFind - run single test, no namespace require
 
 # if no params run all test
 if [ -z $1 ] ; then

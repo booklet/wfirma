@@ -19,6 +19,7 @@ class WFirma
         $this->company_id = $company_id ?? null;
     }
 
+    // Dynamic create and return module
     public function __get(string $name)
     {
         $class_name = '\\Booklet\\WFirma\\Modules\\' . Utils::stringToCamelCase($name);
