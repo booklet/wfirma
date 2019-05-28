@@ -36,7 +36,7 @@ class WFirma
             'resource' => $this->getResourceModuleNameFromClassName(),
             'action' => $action,
             'request_parameters' => $parameters['request_parameters'] ?? null,
-            'data' => $parameters['data'] ?? null,
+            'request_data' => $parameters['request_data'] ?? null,
             'company_id' => $this->company_id,
             'raw_response' => $parameters['raw_response'] ?? null,
         ]);

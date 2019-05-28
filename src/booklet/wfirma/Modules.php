@@ -17,12 +17,12 @@ class Modules extends WFirma
 
     public function add(array $data, array $parameters = [])
     {
-        return $this->request('add', array_merge($parameters, ['data' => $data]));
+        return $this->request('add', array_merge($parameters, ['request_data' => $data]));
     }
 
     public function edit(int $id, array $data, array $parameters = [])
     {
-        return $this->request('edit/' . $id, array_merge($parameters, ['data' => $data]));
+        return $this->request('edit/' . $id, array_merge($parameters, ['request_data' => $data]));
     }
 
     public function delete(int $id, array $parameters = [])

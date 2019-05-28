@@ -20,8 +20,8 @@ class Request
         $this->password = $options['password'];
         $this->resource = $options['resource'];
         $this->action = $options['action'];
-        $this->request = $options['request_parameters'] ?? null;
-        $this->data = $options['data'] ?? null;
+        $this->request_parameters = $options['request_parameters'] ?? null;
+        $this->request_data = $options['request_data'] ?? null;
         $this->company_id = $options['company_id'] ?? null;
         $this->return_raw_response = $options['raw_response'] ?? false;
     }
@@ -54,13 +54,13 @@ class Request
     public function prepareRequestData()
     {
         // Wrap request data
-        if (isset($this->data)) {
+        if (isset($this->request_data)) {
             // new, edit ...
-            $data = $this->data;
+            $data = $this->request_data;
         } else {
             // find, get, delete ...
             $data = [
-                'parameters' => $this->request,
+                'parameters' => $this->request_parameters,
             ];
         }
         $request_data = [
