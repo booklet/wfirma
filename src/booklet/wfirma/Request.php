@@ -63,11 +63,11 @@ class Request
                 'parameters' => $this->request_parameters,
             ];
         }
-        $request_data = [
+        $request = [
             $this->resource => $data,
         ];
 
-        return json_encode($request_data);
+        return json_encode($request);
     }
 
     public function processResponseData(string $result)
