@@ -3,10 +3,8 @@ namespace Booklet\WFirma\Modules;
 
 use Booklet\WFirma\Modules;
 
-class Invoice extends Modules
+class Invoices extends Modules
 {
-    const MODULE_NAME_PLURAL = 'invoices';
-
     public function download(int $invoice_id, array $parameters = [])
     {
         // /invoices/download/ID_FAKTURY

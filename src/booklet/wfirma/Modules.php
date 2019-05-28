@@ -7,25 +7,26 @@ class Modules extends WFirma
 {
     public function find(array $parameters = [])
     {
-        return $this->request(static::MODULE_NAME_PLURAL, 'find', ['request_parameters' => $parameters]);
+        return $this->request('find', ['request_parameters' => $parameters]);
     }
 
-    public function get(int $id)
+    public function get(int $id, array $parameters = [])
     {
-        return $this->request(static::MODULE_NAME_PLURAL, 'get/' . $id);
+        return $this->request('get/' . $id, $parameters);
     }
 
-    public function add(array $data)
+    public function add(array $data, array $parameters = [])
     {
-        return $this->request(static::MODULE_NAME_PLURAL, 'add', ['data' => $data]);
+        return $this->request('add', array_merge($parameters, ['data' => $data]));
     }
 
-    public function edit(int $id, array $data)
+    public function edit(int $id, array $data, array $parameters = [])
     {
-        return $this->request(static::MODULE_NAME_PLURAL, 'edit/' . $id, ['data' => $data]);
+        return $this->request('edit/' . $id, array_merge($parameters, ['data' => $data]));
     }
 
-    public function delete(int $id)
+    public function delete(int $id, array $parameters = [])
     {
+        return $this->request('delete/' . $id, $parameters);
     }
 }

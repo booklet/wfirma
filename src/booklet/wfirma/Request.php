@@ -23,6 +23,7 @@ class Request
         $this->request = $options['request_parameters'] ?? null;
         $this->data = $options['data'] ?? null;
         $this->company_id = $options['company_id'] ?? null;
+        $this->return_raw_response = $options['raw_response'] ?? false;
     }
 
     public function makeRequest()
@@ -62,7 +63,6 @@ class Request
                 'parameters' => $this->request,
             ];
         }
-
         $request_data = [
             $this->resource => $data,
         ];
@@ -70,7 +70,7 @@ class Request
         return json_encode($request_data);
     }
 
-    public function processResponseData($result)
+    public function processResponseData(string $result)
     {
         $response = json_decode($result, true);
 
@@ -79,6 +79,10 @@ class Request
             throw new WFirmaException($status_code);
         }
 
-        return $response;
+        if ($this->return_raw_response) {
+            return $response;
+        }
+
+        return (new ResponseDataProcessor($response, $this->action))->simplify();
     }
 }

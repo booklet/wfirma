@@ -1,8 +1,8 @@
 # PHP wFirma
-Moduł do konstruowania prostych zapytań do API wFirma
+Module for constructing simple queries to the wFirma API
 
-## Użycie
-W `composer.json` dodajemy repozytorium gita:
+## Use
+Add repository in `composer.json` file:
 ```
 {
   "repositories": [
@@ -16,20 +16,29 @@ W `composer.json` dodajemy repozytorium gita:
   },
 }
 ```
-Inicjalizacja (`$company_id` opcjonalnie)
+Initialization (`$company_id` optional)
 ```php
 $wfirma = new \Booklet\WFirma($login, $password, $company_id);
 ```
-Zapytania
+Queries
+Get array of invoices
 ```php
-$invoices = $wfirma->invoice->find($parameters);
-$contractors = $wfirma->contractor->find($parameters);
-$response = $wfirma->{moduł_w_liczbie_pojedynczej}->get($id);
+$invoices = $wfirma->invoices->find($parameters);
 ```
-Dostępne moduły: patrz `src/booklet/wfirma/modules/`
 
-### Przykładowe parametry
-Szczegółowe informacje odnośnie zapytań warunkowych: [https://doc.wfirma.pl/](https://doc.wfirma.pl/)
+Get contractor array
+```php
+$contractors = $wfirma->invoices->get($id);
+```
+
+The general principle of operation
+```php
+$response = $wfirma->{module_name}->get($id);
+```
+Available modules see: `src/booklet/wfirma/modules/`
+
+### Sample parameters
+Detailed information about conditional queries: [https://doc.wfirma.pl/](https://doc.wfirma.pl/)
 ```php
 $parameters = [
     'conditions' => [

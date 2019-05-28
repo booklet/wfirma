@@ -10,4 +10,11 @@ class Utils
 
         return str_replace(' ', '', ucwords($string));
     }
+
+    public static function stringAreStartsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+
+        return substr($haystack, 0, $length) === $needle;
+    }
 }

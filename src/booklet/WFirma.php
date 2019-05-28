@@ -27,18 +27,27 @@ class WFirma
         }
     }
 
-    public function request($resource, $action, array $request_parameters = [])
+    public function request($action, array $parameters = [])
     {
         $request = new Request([
             'login' => $this->login,
             'password' => $this->password,
-            'resource' => $resource,
+            'resource' => $this->getResourceModuleNameFromClassName(),
             'action' => $action,
-            'request_parameters' => $request_parameters['request_parameters'] ?? null,
-            'data' => $request_parameters['data'] ?? null,
+            'request_parameters' => $parameters['request_parameters'] ?? null,
+            'data' => $parameters['data'] ?? null,
             'company_id' => $this->company_id,
+            'raw_response' => $parameters['raw_response'] ?? null,
         ]);
 
         return $request->makeRequest();
+    }
+
+    // Booklet\WFirma\Modules\Invoices => invoices
+    private function getResourceModuleNameFromClassName()
+    {
+        $parts = explode('\\', get_class($this));
+
+        return strtolower(end($parts));
     }
 }

@@ -1,15 +1,15 @@
 <?php
-// UWAGA
-// Testy korzystają z konta demo w wFirma, istnieje możliwość, że z czasem
-// przestana działać poprawnie, że względu na zmiany w koncie demo.
+// ATTENTION
+// Tests use a demo account in wFirma, it is possible that over time
+// will stop working correctly because of changes in the demo account.
 
 namespace Booklet;
 
 class WFirmaTest extends \PHPUnit\Framework\TestCase
 {
-    public function testFnisAssoc()
+    public function testFind()
     {
-        $this->markTestIncomplete('Test wymaga zewnętrznego wywołania, dlatego wyłączony.');
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         $parameters = [
@@ -62,25 +62,34 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
             'limit' => 5,
         ];
 
-        $invoices = $wfirma->invoice->find($parameters);
+        $invoices = $wfirma->invoices->find($parameters);
 
-        $this->assertEquals('OK', $invoices['status']['code']);
-        $this->assertEquals(4, count($invoices['invoices'][0]['invoice']));
+        $this->assertEquals(4, count($invoices[0]));
     }
 
     public function testGet()
     {
-        $this->markTestIncomplete('Test wymaga zewnętrznego wywołania, dlatego wyłączony.');
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
-        $invoice = $wfirma->invoice->get(62407183);
+        $invoice = $wfirma->invoices->get(62407183);
+
+        $this->assertEquals(62407183, $invoice['id']);
+    }
+
+    public function testGetRaw()
+    {
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+
+        $wfirma = new WFirma('demo', 'demo');
+        $invoice = $wfirma->invoices->get(62407183, ['raw_response' => true]);
 
         $this->assertEquals(62407183, $invoice['invoices'][0]['invoice']['id']);
     }
 
     public function testAdd()
     {
-        $this->markTestIncomplete('Test wymaga zewnętrznego wywołania, dlatego wyłączony.');
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         $data = [
@@ -93,14 +102,14 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $new_contractor = $wfirma->contractor->add($data);
+        $new_contractor = $wfirma->contractors->add($data);
 
-        $this->assertEquals('Jan Testowy', $new_contractor['contractors'][0]['contractor']['name']);
+        $this->assertEquals('Jan Testowy', $new_contractor['name']);
     }
 
     public function testEdit()
     {
-        $this->markTestIncomplete('Test wymaga zewnętrznego wywołania, dlatego wyłączony.');
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         // Create new contractor to get id
@@ -113,8 +122,8 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
                 'email' => 'jan@testowy.pl',
             ],
         ];
-        $new_contractor = $wfirma->contractor->add($data);
-        $constractor_id = $new_contractor['contractors'][0]['contractor']['id'];
+        $new_contractor = $wfirma->contractors->add($data);
+        $constractor_id = $new_contractor['id'];
 
         // Update contractor data
         $new_data = [
@@ -122,18 +131,18 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
                 'name' => 'Jan Testowy',
             ],
         ];
-        $updated_contractor = $wfirma->contractor->edit($constractor_id, $new_data);
+        $updated_contractor = $wfirma->contractors->edit($constractor_id, $new_data);
 
-        $this->assertEquals('Jan Testowy', $updated_contractor['contractors'][0]['contractor']['name']);
+        $this->assertEquals('Jan Testowy', $updated_contractor['name']);
     }
 
     public function testRequestException()
     {
-        $this->markTestIncomplete('Test wymaga zewnętrznego wywołania, dlatego wyłączony.');
+        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $this->expectException(\Booklet\WFirma\Exceptions\WFirmaException::class);
 
         $wfirma = new WFirma('demo', 'wrong_password');
-        $wfirma->invoice->find();
+        $wfirma->invoices->find();
     }
 }
