@@ -27,32 +27,34 @@ Get array of invoices:
 $invoices = $wfirma->invoices->find($parameters (optional));
 ```
 
-Get contractor:
+Get invoice:
 ```php
-$contractors = $wfirma->contractors->get($id, $parameters (optional));
+$contractors = $wfirma->invoices->get($id, $parameters (optional));
 ```
 
-Create contractor:
+Create invoice:
 ```php
-$contractors = $wfirma->contractors->add($data, $parameters (optional));
+$contractors = $wfirma->invoices->add($data, $parameters (optional));
 ```
 
-Edit contractor:
+Edit invoice:
 ```php
-$contractors = $wfirma->contractors->edit($id, $data, $parameters (optional));
+$contractors = $wfirma->invoices->edit($id, $data, $parameters (optional));
 ```
 
-Delete contractor:
+Delete invoice:
 ```php
-$contractors = $wfirma->contractors->delete($id, $parameters (optional));
+$contractors = $wfirma->invoices->delete($id, $parameters (optional));
 ```
+
+For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).
 
 The general principle of operation:
 ```php
 $response = $wfirma->{module_name}->{action}();
 ```
 
-We simplify data structure returned from wfirma (see ResponseDataProcessor class).
+We simplify data structure returned from wfirma (see `ResponseDataProcessor` class).
 
 If you want return raw response from api, add parameter:
 ```php
