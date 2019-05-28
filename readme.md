@@ -1,5 +1,5 @@
 # PHP wFirma
-Module for constructing simple queries to the wFirma API.
+Module for constructing simple queries to the wFirma API. For PHP 7.0.
 
 ## Use
 Add repository in `composer.json` file:
@@ -16,35 +16,44 @@ Add repository in `composer.json` file:
   },
 }
 ```
-Usage (`$company_id` optional):
+Usage:
 ```php
-$wfirma = new \Booklet\WFirma($login, $password, $company_id);
+$wfirma = new \Booklet\WFirma($login, $password, $company_id); // $company_id is optional
 ```
 ### Queries
 
 Get array of invoices:
 ```php
-$invoices = $wfirma->invoices->find($parameters (optional));
+$invoices = $wfirma->invoices->find($parameters); // $parameters is optional
 ```
 
 Get contractor:
 ```php
-$contractor = $wfirma->contractors->get($id, $parameters (optional));
+$contractor = $wfirma->contractors->get($id, $parameters); // $parameters is optional
 ```
 
-Create invoice:
+Create contractor:
 ```php
-$invoice = $wfirma->invoices->add($data, $parameters (optional));
+$data = [
+    'contractor' => [
+        'name' => 'Jan Testowy',
+        'street' => 'Testowa 69',
+        'zip' => '66-666',
+        'city' => 'Miastowo',
+        'email' => 'jan@testowy.pl',
+    ],
+];
+$contractor = $wfirma->contractors->add($data, $parameters); // $parameters is optional
 ```
 
 Edit invoice:
 ```php
-$invoice = $wfirma->invoices->edit($id, $data, $parameters (optional));
+$invoice = $wfirma->invoices->edit($id, $data, $parameters); // $parameters is optional
 ```
 
 Delete invoice:
 ```php
-$deleted_invoice = $wfirma->invoices->delete($id, $parameters (optional));
+$deleted_invoice = $wfirma->invoices->delete($id, $parameters); // $parameters is optional
 ```
 
 For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).\
@@ -100,7 +109,7 @@ $parameters = [
                     'condition' => [
                         'field' => 'disposaldate',
                         'operator' => 'lt',
-                        'value' => '2019-05-27',
+                        'value' => '2019-05-31',
                     ]
                 ]
             ]
