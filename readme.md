@@ -27,24 +27,24 @@ Get array of invoices:
 $invoices = $wfirma->invoices->find($parameters (optional));
 ```
 
-Get invoice:
+Get contractor:
 ```php
-$contractors = $wfirma->invoices->get($id, $parameters (optional));
+$contractors = $wfirma->contractors->get($id, $parameters (optional));
 ```
 
 Create invoice:
 ```php
-$contractors = $wfirma->invoices->add($data, $parameters (optional));
+$invoices = $wfirma->invoices->add($data, $parameters (optional));
 ```
 
 Edit invoice:
 ```php
-$contractors = $wfirma->invoices->edit($id, $data, $parameters (optional));
+$invoices = $wfirma->invoices->edit($id, $data, $parameters (optional));
 ```
 
 Delete invoice:
 ```php
-$contractors = $wfirma->invoices->delete($id, $parameters (optional));
+$invoices = $wfirma->invoices->delete($id, $parameters (optional));
 ```
 
 For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).
