@@ -1,7 +1,7 @@
 <?php
 namespace Booklet\WFirma\Modules;
 
-use \Booklet\WFirma\Modules;
+use Booklet\WFirma\Modules;
 
 class Contractor extends Modules
 {

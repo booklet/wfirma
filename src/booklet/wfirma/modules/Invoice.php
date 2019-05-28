@@ -1,7 +1,7 @@
 <?php
 namespace Booklet\WFirma\Modules;
 
-use \Booklet\WFirma\Modules;
+use Booklet\WFirma\Modules;
 
 class Invoice extends Modules
 {
@@ -9,7 +9,7 @@ class Invoice extends Modules
 
     public function download(int $invoice_id, array $parameters = [])
     {
-       // /invoices/download/ID_FAKTURY
+        // /invoices/download/ID_FAKTURY
     }
 
     public function send(int $invoice_id, array $parameters = [])

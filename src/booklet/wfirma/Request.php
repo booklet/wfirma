@@ -1,7 +1,8 @@
 <?php
 namespace Booklet\WFirma;
 
-use \Booklet\WFirma;
+use Booklet\WFirma;
+use Booklet\WFirma\Exceptions\WFirmaException;
 
 class Request
 {
@@ -54,25 +55,30 @@ class Request
         // Wrap request data
         if (isset($this->data)) {
             // new, edit ...
-            $request = [
-                $this->resource => $this->data,
-            ];
-
+            $data = $this->data;
         } else {
             // find, get, delete ...
-            $request = [
-                $this->resource => [
-                    'parameters' => $this->request,
-                ],
+            $data = [
+                'parameters' => $this->request,
             ];
         }
 
-        return json_encode($request);
+        $request_data = [
+            $this->resource => $data,
+        ];
+
+        return json_encode($request_data);
     }
 
-    // TODO Check response data
     public function processResponseData($result)
     {
-        return json_decode($result);
+        $response = json_decode($result, true);
+
+        $status_code = $response['status']['code'] ?? 'UNEXPECTED STATUS';
+        if ($status_code !== 'OK') {
+            throw new WFirmaException($status_code);
+        }
+
+        return $response;
     }
 }

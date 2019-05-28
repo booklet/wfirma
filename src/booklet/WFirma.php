@@ -19,7 +19,8 @@ class WFirma
         $this->company_id = $company_id ?? null;
     }
 
-    public function __get(string $name) {
+    public function __get(string $name)
+    {
         $class_name = '\\Booklet\\WFirma\\Modules\\' . Utils::stringToCamelCase($name);
         if (class_exists($class_name)) {
             return new $class_name($this->login, $this->password, $this->company_id);

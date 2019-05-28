@@ -23,11 +23,11 @@ class RequestTest extends \PHPUnit\Framework\TestCase
                                     'field' => 'type',
                                     'operator' => 'eq',
                                     'value' => 'proforma',
-                                ]
+                                ],
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
             'company_id' => 123,
         ]);

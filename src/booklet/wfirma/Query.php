@@ -3,12 +3,11 @@ namespace Booklet\WFirma;
 
 class Query
 {
-     // budowanie obiektu przekazywanego do requestu
-     // $wfirma->setParameter("PARAMETR", "wartosc");
-     // $wfirma->addCondition("POLE", "OPERATOR", "WARTOSC");
-     // OR i AND 
-     // $wfirma->setFields(["POLE1", "POLE2"]);
-     // $wfirma->setOrder("POLE", "KOLEJNOŚĆ");
-
-
+    // $query = new Query();
+    // $query->setParameter('parameter', 'value');
+    // $query->addCondition('field', 'oprator', 'value');
+    // // how add OR AND conditions?
+    // $query->setFields(['field1', 'field2']);
+    // $query->setOrder('field', 'order');
+    // $wfirma->invoice->find($query);
 }
