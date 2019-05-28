@@ -16,7 +16,7 @@ Add repository in `composer.json` file:
   },
 }
 ```
-Initialization (`$company_id` optional):
+Usage (`$company_id` optional):
 ```php
 $wfirma = new \Booklet\WFirma($login, $password, $company_id);
 ```
@@ -29,30 +29,31 @@ $invoices = $wfirma->invoices->find($parameters (optional));
 
 Get contractor:
 ```php
-$contractors = $wfirma->contractors->get($id, $parameters (optional));
+$contractor = $wfirma->contractors->get($id, $parameters (optional));
 ```
 
 Create invoice:
 ```php
-$invoices = $wfirma->invoices->add($data, $parameters (optional));
+$invoice = $wfirma->invoices->add($data, $parameters (optional));
 ```
 
 Edit invoice:
 ```php
-$invoices = $wfirma->invoices->edit($id, $data, $parameters (optional));
+$invoice = $wfirma->invoices->edit($id, $data, $parameters (optional));
 ```
 
 Delete invoice:
 ```php
-$invoices = $wfirma->invoices->delete($id, $parameters (optional));
+$deleted_invoice = $wfirma->invoices->delete($id, $parameters (optional));
 ```
 
-For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).
-
+For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).\
 The general principle of operation:
 ```php
 $response = $wfirma->{module_name}->{action}();
 ```
+
+### Simplify data
 
 We simplify data structure returned from wfirma (see `ResponseDataProcessor` class).
 
