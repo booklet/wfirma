@@ -44,7 +44,27 @@ class RequestTest extends \PHPUnit\Framework\TestCase
     public function testPrepareRequestData()
     {
         $this->assertEquals(
-            '{"resource":{"parameters":{"page":1,"limit":5,"conditions":[{"and":[{"condition":{"field":"type","operator":"eq","value":"proforma"}}]}]}}}',
+            [
+                'resource' => [
+                    'parameters' => [
+                        'page' => 1,
+                        'limit' => 5,
+                        'conditions' => [
+                            [
+                                'and' => [
+                                    [
+                                        'condition' => [
+                                            'field' => 'type',
+                                            'operator' => 'eq',
+                                            'value' => 'proforma',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             $this->request()->prepareRequestData()
         );
     }

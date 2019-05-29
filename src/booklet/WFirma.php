@@ -38,7 +38,6 @@ class WFirma
             'request_parameters' => $parameters['request_parameters'] ?? null,
             'request_data' => $parameters['request_data'] ?? null,
             'company_id' => $this->company_id,
-            'raw_response' => $parameters['raw_response'] ?? null,
         ]);
 
         return $request->makeRequest();

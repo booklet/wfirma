@@ -62,9 +62,19 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
             'limit' => 5,
         ];
 
-        $invoices = $wfirma->invoices->find($parameters);
+        $response = $wfirma->invoices->find($parameters);
 
-        $this->assertEquals(4, count($invoices[0]));
+        //   die(print_r($response->requestFullQuery()));
+
+        $this->assertEquals(4, count($response->data()[0]));
+        $this->assertEquals(4, count($response->rawData()['invoices'][0]['invoice']));
+        $this->assertEquals(3, count($response->parameters()));
+        $this->assertEquals('invoices', $response->requestResource());
+        $this->assertEquals('find', $response->requestAction());
+        $this->assertEquals($parameters, $response->requestParameters());
+        $this->assertEquals(2, count($response->requestFullQuery()['invoices']['parameters']['conditions'][0]['or']));
+        $this->assertEquals(null, $response->requestData());
+        $this->assertEquals(null, $response->requestCompanyId());
     }
 
     public function testGet()
@@ -72,19 +82,9 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
         $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
-        $invoice = $wfirma->invoices->get(62407183);
+        $invoice = $wfirma->invoices->get(62407183)->data();
 
         $this->assertEquals(62407183, $invoice['id']);
-    }
-
-    public function testGetRaw()
-    {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
-
-        $wfirma = new WFirma('demo', 'demo');
-        $invoice = $wfirma->invoices->get(62407183, ['raw_response' => true]);
-
-        $this->assertEquals(62407183, $invoice['invoices'][0]['invoice']['id']);
     }
 
     public function testAdd()
@@ -102,9 +102,23 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $new_contractor = $wfirma->contractors->add($data);
+        $response = $wfirma->contractors->add($data);
+
+        $new_contractor = $response->data();
 
         $this->assertEquals('Jan Testowy', $new_contractor['name']);
+        $this->assertEquals(
+            [
+                'contractor' => [
+                    'name' => 'Jan Testowy',
+                    'street' => 'Testowa 69',
+                    'zip' => '66-666',
+                    'city' => 'Miastowo',
+                    'email' => 'jan@testowy.pl',
+                ],
+            ],
+            $response->requestData()
+        );
     }
 
     public function testEdit()
@@ -122,7 +136,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
                 'email' => 'jan@testowy.pl',
             ],
         ];
-        $new_contractor = $wfirma->contractors->add($data);
+        $new_contractor = $wfirma->contractors->add($data)->data();
         $constractor_id = $new_contractor['id'];
 
         // Update contractor data
@@ -131,7 +145,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
                 'name' => 'Jan Testowy',
             ],
         ];
-        $updated_contractor = $wfirma->contractors->edit($constractor_id, $new_data);
+        $updated_contractor = $wfirma->contractors->edit($constractor_id, $new_data)->data();
 
         $this->assertEquals('Jan Testowy', $updated_contractor['name']);
     }

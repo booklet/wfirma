@@ -1,8 +1,9 @@
+
 # PHP wFirma
 Module for constructing simple queries to the wFirma API. For PHP 7.0 and above.
 
 ## Use
-Add repository in `composer.json` file:
+With composer. Add repository in `composer.json` file:
 ```
 {
   "repositories": [
@@ -24,12 +25,12 @@ $wfirma = new \Booklet\WFirma($login, $password, $company_id); // $company_id is
 
 Get array of invoices:
 ```php
-$invoices = $wfirma->invoices->find($parameters); // $parameters is optional
+$invoices = $wfirma->invoices->find($parameters)->data(); // $parameters is optional
 ```
 
 Get contractor:
 ```php
-$contractor = $wfirma->contractors->get($id, $parameters); // $parameters is optional
+$contractor = $wfirma->contractors->get($id, $parameters)->data(); // $parameters is optional
 ```
 
 Create contractor:
@@ -43,39 +44,46 @@ $data = [
         'email' => 'jan@testowy.pl',
     ],
 ];
-$contractor = $wfirma->contractors->add($data, $parameters); // $parameters is optional
+$contractor = $wfirma->contractors->add($data, $parameters)->data(); // $parameters is optional
 ```
 
 Edit invoice:
 ```php
-$invoice = $wfirma->invoices->edit($id, $data, $parameters); // $parameters is optional
+$invoice = $wfirma->invoices->edit($id, $data, $parameters)->data(); // $parameters is optional
 ```
 
 Delete invoice:
 ```php
-$deleted_invoice = $wfirma->invoices->delete($id, $parameters); // $parameters is optional
+$deleted_invoice = $wfirma->invoices->delete($id, $parameters)->data(); // $parameters is optional
 ```
 
-For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).\
-The general principle of operation:
+For other custom module actions see the selected class (`src/booklet/wfirma/modules/`).
+
+## General principle
 ```php
 $response = $wfirma->{module_name}->{action}();
 ```
 
-### Simplify data
+Response object functions:
 
-We simplify data structure returned from wfirma (see `ResponseDataProcessor` class).
 
-If you want return raw response from api, add parameter:
 ```php
-$invoices = $wfirma->invoices->find(['raw_response' => true]);
+$response->data(); // simplify data from wfirma (see ResponseDataProcessor class)
+$response->rawData(); // raw data from wfirma
+$response->parameters(); // response parameters: limit, page, total
+$response->requestResource();
+$response->requestAction();
+$response->requestParameters();
+$response->requestFullQuery(); // full query send to wfirma
+$response->requestData();
+$response->requestCompanyId();
 ```
 
-###  Available modules
+##  Available modules
 
 See: `src/booklet/wfirma/modules/`.
 
-### Sample parameters
+## Sample parameters
 Detailed information about conditional queries: [https://doc.wfirma.pl/](https://doc.wfirma.pl/).
 ```php
 $parameters = [
@@ -120,6 +128,12 @@ $parameters = [
         ['field' => 'Invoice.date'],
         ['field' => 'Invoice.type'],
         ['field' => 'Invoice.fullnumber'],
+        ['field' => 'InvoiceContent.name'],
+        ['field' => 'InvoiceContent.count'],
+        ['field' => 'InvoiceContent.price'],
+        ['field' => 'Contractor.name'],
+        ['field' => 'Contractor.nip'],
+        ['field' => 'Contractor.email'],
     ],
     'order' => [
         ['desc' => 'date']

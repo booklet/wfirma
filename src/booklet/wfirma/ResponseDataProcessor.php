@@ -56,12 +56,13 @@ class ResponseDataProcessor
         $this->setResourceName();
     }
 
-    public function simplify()
+    public function simplifyDataStructure()
     {
-        $this->removeParameters();
+        $response = $this->response;
+        unset($response[$this->resource]['parameters']);
 
         $simplify_data = [];
-        foreach ($this->response[$this->resource] as $item) {
+        foreach ($response[$this->resource] as $item) {
             $simplify_data[] = $item[array_keys($item)[0]];
         }
 
@@ -73,16 +74,16 @@ class ResponseDataProcessor
         return $simplify_data;
     }
 
+    public function getParametersFromResponse()
+    {
+        return $this->response[$this->resource]['parameters'];
+    }
+
     private function setResourceName()
     {
         $response_array_keys = array_keys($this->response); // ['resource' => [], 'status' => []]
         // In case if array keys order change
         $this->resource = array_diff($response_array_keys, ['status'])[0];
-    }
-
-    private function removeParameters()
-    {
-        unset($this->response[$this->resource]['parameters']);
     }
 
     private function isOneItemResponseRequest()
