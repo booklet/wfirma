@@ -7,7 +7,7 @@ class Modules extends WFirma
 {
     public function find(array $parameters = [])
     {
-        return $this->request('find', ['request_parameters' => $parameters]);
+        return $this->request('find', array_merge($parameters, ['request_parameters' => $parameters]));
     }
 
     public function get(int $id, array $parameters = [])
