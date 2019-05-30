@@ -21,6 +21,8 @@ Usage:
 ```php
 $wfirma = new \Booklet\WFirma($login, $password, $company_id); // $company_id is optional
 ```
+(two letters 'o' in namespace, not three like in github account name)
+
 ### Queries
 
 Get array of invoices:
