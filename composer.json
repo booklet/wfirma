@@ -24,7 +24,7 @@
   "autoload": {
     "psr-4": {
       "": "src/" ,
-      "Booklet\\Wfirma\\": "src/wfirma"
+      "Booklet\\Wfirma\\": "src/booklet"
     }
   }
 }
