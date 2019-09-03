@@ -9,11 +9,11 @@ With composer. Add repository in `composer.json` file:
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/boooklet/wfirma.git"
+      "url": "https://github.com/booklet/wfirma.git"
     },
   ],
   "require": {
-    "boooklet/wfirma": "dev-master",
+    "booklet/wfirma": "dev-master",
   },
 }
 ```

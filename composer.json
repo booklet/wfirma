@@ -1,13 +1,13 @@
 {
-  "name": "boooklet/wfirma",
+  "name": "booklet/wfirma",
   "repositories": [
     {
       "type": "package",
       "package": {
-        "name": "boooklet/wfirma",
+        "name": "booklet/wfirma",
         "type": "package",
         "source": {
-          "url": "git@github.com/boooklet/wfirma.git",
+          "url": "git@github.com/booklet/wfirma.git",
           "type": "git",
           "reference": "master"
         },
