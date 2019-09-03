@@ -144,3 +144,20 @@ $parameters = [
     'limit' => 5,
 ];
 ```
+
+
+## Run tests
+
+In module directory run (if $PWD not working, set module path manually):
+
+```
+$ docker build -t php_70cli_with_composer .
+$ docker run -v "$PWD"/:/var/www -ti php_70cli_with_composer /bin/bash
+```
+
+Inside docker container run:
+```
+$ cd var/www
+$ composer install
+$ ./test
+```

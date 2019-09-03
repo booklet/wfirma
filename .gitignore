@@ -1,4 +1,5 @@
-vendor
+/vendor/
+composer.phar
 composer.lock
 php-cs-fixer-v2.phar
-secret.php
+.idea
