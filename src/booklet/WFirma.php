@@ -1,8 +1,6 @@
 <?php
-namespace Booklet;
 
-use Booklet\WFirma\Utils;
-use Booklet\WFirma\Request;
+namespace Booklet\WFirma;
 
 class WFirma
 {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Booklet\WFirma;
 
 class Response

@@ -1,7 +1,7 @@
 <?php
+
 namespace Booklet\WFirma;
 
-use Booklet\WFirma;
 use Booklet\WFirma\Exceptions\WFirmaException;
 
 class Request

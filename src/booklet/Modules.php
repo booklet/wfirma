@@ -1,7 +1,6 @@
 <?php
-namespace Booklet\WFirma;
 
-use Booklet\WFirma;
+namespace Booklet\WFirma;
 
 class Modules extends WFirma
 {

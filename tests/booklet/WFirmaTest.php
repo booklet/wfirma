@@ -3,13 +3,13 @@
 // Tests use a demo account in wFirma, it is possible that over time
 // will stop working correctly because of changes in the demo account.
 
-namespace Booklet;
+namespace Booklet\WFirma;
 
 class WFirmaTest extends \PHPUnit\Framework\TestCase
 {
     public function testFind()
     {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+        //$this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         $parameters = [
@@ -79,7 +79,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
 
     public function testGet()
     {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+        //$this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         $invoice = $wfirma->invoices->get(62407183)->data();
@@ -89,7 +89,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
 
     public function testAdd()
     {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+        //$this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         $data = [
@@ -123,7 +123,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
 
     public function testEdit()
     {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+        //$this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $wfirma = new WFirma('demo', 'demo');
         // Create new contractor to get id
@@ -152,7 +152,7 @@ class WFirmaTest extends \PHPUnit\Framework\TestCase
 
     public function testRequestException()
     {
-        $this->markTestIncomplete('This test requires an external call, so we disabled it.');
+       // $this->markTestIncomplete('This test requires an external call, so we disabled it.');
 
         $this->expectException(\Booklet\WFirma\Exceptions\WFirmaException::class);
 
